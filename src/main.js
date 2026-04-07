@@ -47,3 +47,9 @@ form.addEventListener("submit", async (e) => {
     hideLoader();
   }
 });
+let currentQuery = "";
+let currentPage = 1;
+const PER_PAGE = 15;
+
+const loadMoreBtn = document.querySelector(".load-more");
+const endMessage = document.querySelector(".end-message");

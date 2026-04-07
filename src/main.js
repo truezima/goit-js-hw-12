@@ -45,8 +45,8 @@ form.addEventListener("submit", async (e) => {
     });
   } finally {
     hideLoader();
-  }
-});
+  } 
+});  
 let currentQuery = "";
 let currentPage = 1;
 const PER_PAGE = 15;

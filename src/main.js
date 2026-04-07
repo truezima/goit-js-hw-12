@@ -11,7 +11,7 @@ import {
   hideLoadMoreButton,
 } from "./js/render-functions";
 
-
+// DOM елементи
 const form = document.querySelector(".form");
 const loadMoreBtn = document.querySelector(".load-more");
 const endMessage = document.querySelector(".end-message");
@@ -24,25 +24,37 @@ const PER_PAGE = 15;
 
 async function searchImages(query, page = 1) {
   showLoader();
+  hideLoadMoreButton(); 
+
   try {
     const data = await getImagesByQuery(query, page, PER_PAGE);
     hideLoader();
 
+   
     if (data.hits.length === 0) {
+      clearGallery();
       hideLoadMoreButton();
       endMessage.style.display = "block";
+
+      iziToast.warning({
+        message: "Sorry, there are no images matching your search query.",
+      });
       return;
     }
 
     createGallery(data.hits);
 
-    // показати або сховати кнопку Load more
+    
     if (page * PER_PAGE < data.totalHits) {
       showLoadMoreButton();
       endMessage.style.display = "none";
     } else {
       hideLoadMoreButton();
       endMessage.style.display = "block";
+
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+      });
     }
   } catch (error) {
     hideLoader();
@@ -61,21 +73,25 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  if (query !== currentQuery) {
-    currentQuery = query;
-    currentPage = 1;
-    clearGallery();
-    hideLoadMoreButton();
-    endMessage.style.display = "none";
-  }
+  
+  currentQuery = query;
+  currentPage = 1;
+  clearGallery();
+  hideLoadMoreButton();
+  endMessage.style.display = "none";
 
   await searchImages(currentQuery, currentPage);
   currentPage += 1; 
 });
 
+
 loadMoreBtn.addEventListener("click", async () => {
+  
+  hideLoadMoreButton();
+
   await searchImages(currentQuery, currentPage);
 
+ 
   const card = document.querySelector(".gallery .gallery-item");
   if (card) {
     const { height } = card.getBoundingClientRect();

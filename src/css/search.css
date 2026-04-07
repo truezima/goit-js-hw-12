@@ -1,0 +1,72 @@
+.form {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+ }
+.search-input
+ {
+  width: 400px;          /* ширина */
+  padding: 12px 16px;    /* внутрішні відступи */
+  font-size: 18px;       /* більший текст */
+  border-radius: 8px 0 0 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.form button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid #ccc;
+  border-left: none;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #000;
+}
+
+.search-input:focus + button{
+  border-color: #000;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.gallery-item {
+    border: 1px solid #000;
+    border-radius: 8px;
+
+}
+
+.gallery img {
+  width: 300px;      /* 🔥 фіксована ширина */
+  height: 200px;
+  object-fit: cover; /* щоб не тягнуло картинку */
+  border-radius: 8px 8px 0 0;
+}
+.info {
+    padding:8px;
+}
+.info ul {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+.info li {
+  display: flex;
+  flex-direction: column; /* 🔥 слова зверху, число знизу */
+  align-items: center;
+  font-size: 14px;
+}
+
+.info li span {
+  font-weight: bold;
+  margin-top: 4px;
+}
